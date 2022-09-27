@@ -5,6 +5,7 @@
 import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 ProductoCatalogoModelo productoCatalogoModeloFromJson(String str) => ProductoCatalogoModelo.fromJson(json.decode(str));
 
@@ -40,7 +41,13 @@ class ProductoCatalogoModelo {
   };
 
  guardarProducto() async {
+   final storage = FirebaseStorage.instance.ref();
+// Child references can also take paths
+// spaceRef now points to "images/space.jpg
+// imagesRef still points to "images"
+   final spaceRef = storage.child("images/");
 
-   await database.ref("productos").child(nombre).set(toJson());
+
+   // await database.ref("productos").child(nombre).set(toJson());
  }
 }
