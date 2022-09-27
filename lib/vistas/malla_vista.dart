@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mi_catalogo_w/modelo/producto_catalogo_modelo.dart';
 import 'package:mi_catalogo_w/vistas/widgets/menu_widget.dart';
 
-import 'home_vista.dart';
 import 'lista_producto_vista.dart';
 
 class MallaVista extends StatefulWidget {
@@ -16,6 +13,10 @@ class MallaVista extends StatefulWidget {
   State<MallaVista> createState() => _MallaVistaState();
 }
 
+///
+/// jhgdjwcdc
+///
+/// wedcwedc
 class _MallaVistaState extends State<MallaVista> {
   List<ProductoCatalogoModelo> producto = [];
 

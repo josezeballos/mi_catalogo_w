@@ -10,6 +10,7 @@ ProductoCatalogoModelo productoCatalogoModeloFromJson(String str) => ProductoCat
 
 String productoCatalogoModeloToJson(ProductoCatalogoModelo data) => json.encode(data.toJson());
 
+///clase modelo del producto
 class ProductoCatalogoModelo {
   ProductoCatalogoModelo({
     required this.img,
