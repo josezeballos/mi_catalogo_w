@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "450710216527",
+    "project_id": "cotizar-26a3b",
+    "storage_bucket": "cotizar-26a3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450710216527:android:17d8edd01ce28839db2f3a",
+        "android_client_info": {
+          "package_name": "com.example.mi_catalogo_w"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450710216527-k578r22uc7lohsuba67t7cde0ddd7fvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCytipqUBEZtobPxcHEkYxc3WGY20dA1hk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "450710216527-k578r22uc7lohsuba67t7cde0ddd7fvh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
