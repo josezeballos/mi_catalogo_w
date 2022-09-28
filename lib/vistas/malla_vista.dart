@@ -61,12 +61,7 @@ class _MallaVistaState extends State<MallaVista> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_business),
         onPressed: () async {
-          ProductoCatalogoModelo(
-                  img: "jhgjh",
-                  nombre: "nhgjhg",
-                  precio: 12,
-                  descripcion: "jgjhghgfhgfhfhgf")
-              .guardarProducto();
+
         },
       ),
       appBar: AppBar(
@@ -114,10 +109,7 @@ class _MallaVistaState extends State<MallaVista> {
                       border: Border.all(width: 2, color: Colors.black26)),
                   child: Column(
                     children: [
-                      IconButton(
-                          onPressed: () => Navigator.pushNamed(
-                              context, ListaProductoVista().routName),
-                          icon: Icon(Icons.add_box)),
+                      Expanded(child: Image(image: NetworkImage(producto[index].img))),
                       Text(producto[index].nombre),
                       Text('${producto[index].precio}'),
                     ],

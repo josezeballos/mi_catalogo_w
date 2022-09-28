@@ -49,6 +49,7 @@ class ProductoCatalogoModelo {
     final storage = FirebaseStorage.instance.ref();
     final spaceRef = storage.child("images/");
     File file = File(img);
+
     try {
       img = await spaceRef.putFile(file).snapshot.ref.getDownloadURL();
       await database.ref("productos").child(nombre).set(toJson());
