@@ -24,7 +24,6 @@ class _NuevoProductoVistaState extends State<NuevoProductoVista> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         title: Text('Nuevo Producto'),
       ),
@@ -36,7 +35,6 @@ class _NuevoProductoVistaState extends State<NuevoProductoVista> {
             children: [
               Container(
                 height: 200,
-
                 decoration: BoxDecoration(
                     color: Colors.lime, border: Border.all(width: 3)),
                 alignment: Alignment.center,
@@ -44,7 +42,7 @@ class _NuevoProductoVistaState extends State<NuevoProductoVista> {
                     ? const Text('seleccionar foto')
                     : Image(
                         image: FileImage(File(image!.path)),
-                  fit: BoxFit.contain,
+                        fit: BoxFit.contain,
                       ),
               ),
               ElevatedButton(
@@ -55,17 +53,30 @@ class _NuevoProductoVistaState extends State<NuevoProductoVista> {
                     print('${image!.path}');
                   },
                   child: Text('Agregar')),
-              TextField(controller: nombre,decoration: const InputDecoration(labelText: 'nombre'),),
-              TextField(controller: precio,decoration: const InputDecoration(labelText: 'precio'),),
-              TextField(controller: descripcion,decoration: const InputDecoration(labelText: 'descripcion'),),
-              ElevatedButton(onPressed: (){ProductoCatalogoModelo(
-                  img: image!.path,
-                  nombre: nombre.text,
-                  precio: double.parse(precio.text),
-                  descripcion: descripcion.text
-              ).guardarProducto();
-                Navigator.pop(context);
-                } , child: Text('guardar'))
+              TextField(
+                controller: nombre,
+                decoration: const InputDecoration(labelText: 'nombre'),
+              ),
+              TextField(
+                controller: precio,
+                decoration: const InputDecoration(labelText: 'precio'),
+              ),
+              TextField(
+                controller: descripcion,
+                decoration: const InputDecoration(labelText: 'descripcion'),
+              ),
+              ElevatedButton(
+                  onPressed: () async{
+                    await ProductoCatalogoModelo(
+                            img: image!.path,
+                            nombre: nombre.text,
+                            precio: double.parse(precio.text),
+                            descripcion: descripcion.text)
+                        .guardarProducto();
+                    if (!mounted) return;
+                    Navigator.pop(context);
+                  },
+                  child: Text('guardar'))
             ],
           ),
         ),

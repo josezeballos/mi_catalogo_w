@@ -1,5 +1,8 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:mi_catalogo_w/modelo/producto_catalogo_modelo.dart';
 import 'package:mi_catalogo_w/vistas/detalles_producto_vista.dart';
+import 'package:mi_catalogo_w/vistas/widgets/menu_widget.dart';
 import 'package:mi_catalogo_w/vistas/widgets/productotile_widget.dart';
 
 class ListaProductoVista extends StatefulWidget {
@@ -11,23 +14,51 @@ class ListaProductoVista extends StatefulWidget {
 }
 
 class _ListaProductoVistaState extends State<ListaProductoVista> {
+  DatabaseReference starCountRef = FirebaseDatabase.instance.ref('productos');
+  List<ProductoCatalogoModelo> producto = [];
+  listenProduct() {
+    starCountRef.onValue.listen((DatabaseEvent event) {
+      final data = event.snapshot.value as Map;
+      producto.clear();
+      data.forEach((key, value) {
+        producto.add(ProductoCatalogoModelo(
+            img: value['img'],
+            nombre: value['nombre'],
+            precio: double.parse(value['precio'].toString()),
+            descripcion: value['descripcion']));
+        print(producto);
+        setState(() {});
+      });
+      // final prod = productoCatalogoModeloFromJson(data);
+    });
+  }
+
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    listenProduct();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MenuWidget(),
       appBar: AppBar(
         title: Text('Lista Productos'),
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
+          final item = producto[index];
+
           return ProductoTileWidget(
-            imagen: 'asd',
-            nombre: 'producto $index',
-            precio: (index * 4).toString(),
+            imagen: item.img,
+            nombre: item.nombre,
+            precio: item.precio.toString(),
             onPressed: () =>
                 Navigator.pushNamed(context, DetallesProductoVista().routName),
           );
         },
-        itemCount: 10,
+        itemCount: producto.length,
       ),
     );
   }

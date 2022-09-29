@@ -45,17 +45,22 @@ class ProductoCatalogoModelo {
         "descripcion": descripcion,
       };
 
-  guardarProducto() async {
+  Future<void> guardarProducto() async {
     final storage = FirebaseStorage.instance.ref();
-    final spaceRef = storage.child("images/");
+
     File file = File(img);
+    print(file.parent);
+    String nameFile = img.replaceAll(file.parent.toString(), '');
+    print('************NameFile $nameFile');
+    final rutaRef = storage.child('imagenfoto/');
 
     try {
-      img = await spaceRef.putFile(file).snapshot.ref.getDownloadURL();
+      img = await rutaRef.putFile(file).snapshot.ref.getDownloadURL();
+    print('********guardarProducto***: ${img}');
       await database.ref("productos").child(nombre).set(toJson());
       print(toString());
     } catch (error) {
-      print(error);
+      print('********guardarProducto catch***: $error');
     }
   }
 

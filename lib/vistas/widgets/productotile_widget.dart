@@ -26,6 +26,7 @@ class ProductoTileWidget extends StatelessWidget {
             width: 100,
             height: 100,
             decoration: BoxDecoration(color: Colors.lime),
+            child: Image(image: NetworkImage(imagen)),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
