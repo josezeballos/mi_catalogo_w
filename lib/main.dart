@@ -6,6 +6,7 @@ import 'package:mi_catalogo_w/vistas/home_vista.dart';
 import 'package:mi_catalogo_w/vistas/lista_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/malla_vista.dart';
 import 'package:mi_catalogo_w/vistas/nuevo_producto_vista.dart';
+import 'package:mi_catalogo_w/vistas/usuarios/iniciar_con_telefono_vista.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +35,8 @@ class MyApp extends StatelessWidget {
         const NuevoProductoVista().routName:(context) => const NuevoProductoVista(),
         const ListaProductoVista().routName:(context) => const ListaProductoVista(),
         const DetallesProductoVista().routName:(context) => const DetallesProductoVista(),
+        const IniciarConTelefonoVista().routName:(context) => const IniciarConTelefonoVista(),
+
 
 
       }

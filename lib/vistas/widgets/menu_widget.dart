@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mi_catalogo_w/vistas/lista_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/nuevo_producto_vista.dart';
+import 'package:mi_catalogo_w/vistas/usuarios/iniciar_con_telefono_vista.dart';
 
 import '../malla_vista.dart';
 
@@ -42,6 +43,15 @@ class MenuWidget extends StatelessWidget {
                 icon: const Icon(Icons.arrow_right),
                 onPressed: () => Navigator.pushReplacementNamed(
                     context, const ListaProductoVista().routName),
+
+              ),
+            ),
+            ListTile(
+              title: const Text('Iniciar sesion'),
+              trailing: IconButton(
+                icon: const Icon(Icons.arrow_right),
+                onPressed: () => Navigator.pushReplacementNamed(context,
+                    const IniciarConTelefonoVista().routName),
               ),
             )
           ],
