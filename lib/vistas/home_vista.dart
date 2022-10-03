@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mi_catalogo_w/vistas/widgets/menu_widget.dart';
 
-import 'malla_vista.dart';
 
 class HomeVista extends StatelessWidget {
   const HomeVista({Key? key}) : super(key: key);
@@ -10,10 +9,10 @@ class HomeVista extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.add),
+          leading: Icon(Icons.add_box),
           actions: [
             Container(
 
@@ -26,7 +25,6 @@ class HomeVista extends StatelessWidget {
           ],
           bottom: TabBar(tabs: [
             Tab(icon: Icon(Icons.qr_code), text: 'Catalogo'),
-            Tab(icon: Icon(Icons.message),text: 'Alertas'),
             Tab(icon: Icon(Icons.perm_identity),text: 'Mi cuenta'),
           ]),
         ),
