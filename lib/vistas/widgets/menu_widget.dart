@@ -51,7 +51,7 @@ class MenuWidget extends StatelessWidget {
               trailing: IconButton(
                 icon: const Icon(Icons.arrow_right),
                 onPressed: () => Navigator.pushReplacementNamed(context,
-                    const IniciarConTelefonoVista().routName),
+                    IniciarConTelefonoVista().routName),
               ),
             )
           ],

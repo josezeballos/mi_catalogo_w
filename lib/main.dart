@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         const NuevoProductoVista().routName:(context) => const NuevoProductoVista(),
         const ListaProductoVista().routName:(context) => const ListaProductoVista(),
         const DetallesProductoVista().routName:(context) => const DetallesProductoVista(),
-        const IniciarConTelefonoVista().routName:(context) => const IniciarConTelefonoVista(),
+        IniciarConTelefonoVista().routName:(context) => IniciarConTelefonoVista(),
 
 
 
