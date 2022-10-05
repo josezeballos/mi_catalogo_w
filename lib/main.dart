@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.yellow,
       ),
-      initialRoute: const  MallaVista().routName,
+      initialRoute: const  HomeVista().routName,
       routes: {
         const HomeVista().routName:(context) => const HomeVista(),
         const MallaVista().routName:(context) => const MallaVista(),
