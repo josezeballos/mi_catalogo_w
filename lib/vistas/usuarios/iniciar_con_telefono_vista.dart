@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mi_catalogo_w/modelo/usuario_modelo.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 
 import '../home_vista.dart';
 
@@ -46,12 +49,19 @@ class _IniciarConTelefonoVistaState extends State<IniciarConTelefonoVista> {
                       await _dialogBuilder(context);
                       print('******************************$smsCode');
                       try {
+                        final storage = FlutterSecureStorage();
+
                         if (smsCode.isNotEmpty) {
                           PhoneAuthCredential credential =
                           PhoneAuthProvider.credential(
                               verificationId: verificationId, smsCode: smsCode);
 
-                          await auth.signInWithCredential(credential);
+                          final userRespuesta=await auth.signInWithCredential(credential);
+
+
+                          storage.write(key: 'uid', value: userRespuesta.user!.uid);
+                          storage.write(key: 'numeroTelefono', value: userRespuesta.user!.phoneNumber);
+
                           if(!mounted)return;
                           Navigator.pushReplacementNamed(context, const HomeVista().routName);
 
@@ -65,7 +75,8 @@ class _IniciarConTelefonoVistaState extends State<IniciarConTelefonoVista> {
                   );
                 }
               },
-              child: Text('entrar'))
+              child: Text('entrar')),
+
         ],
       ),
     ));
