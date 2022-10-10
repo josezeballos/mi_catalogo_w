@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mi_catalogo_w/vistas/usuarios/iniciar_con_telefono_vista.dart';
 import 'package:mi_catalogo_w/vistas/usuarios/usuario_vista.dart';
+import 'package:mi_catalogo_w/vistas/widgets/buscador_widget.dart';
 import 'package:mi_catalogo_w/vistas/widgets/menu_widget.dart';
+
+import 'malla_vista.dart';
 
 class HomeVista extends StatefulWidget {
   const HomeVista({Key? key}) : super(key: key);
@@ -20,21 +23,15 @@ class _HomeVistaState extends State<HomeVista> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            leading: const Icon(Icons.add_box),
+            leading: Image.asset('asset/logo.png', height: 300),
             actions: [
-              Container(
-                child: const TextField(
-                  decoration: InputDecoration(
-                      icon: const Icon(Icons.search),
-                      hintText: 'Buscar para cotizar ya'),
-                ),
-                margin: const EdgeInsets.all(5),
-                width: 230,
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(50)),
-              )
+              BuscadorWidget(),
+              // IconButton(onPressed: (){}, icon: Icon(Icons.search)),
+              IconButton(onPressed: (){
+
+                Navigator.pushNamed(context, IniciarConTelefonoVista().routName);
+                }, icon: Icon(Icons.person)),
+
             ],
             bottom: const TabBar(
               tabs: [
@@ -49,6 +46,7 @@ class _HomeVistaState extends State<HomeVista> {
           drawer: const MenuWidget(),
           body: PageView(
             children: [
+              MallaVista(),
               Scaffold(
                   body: Center(
                 child: Text('Catalogo'),

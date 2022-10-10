@@ -23,6 +23,9 @@ class _IniciarConTelefonoVistaState extends State<IniciarConTelefonoVista> {
   Widget build(BuildContext context) {
     final telefono = TextEditingController();
     return Scaffold(
+      appBar: AppBar(
+        title: Text('iniciar sesion'),
+      ),
         body: Center(
       child: Column(
         children: [
