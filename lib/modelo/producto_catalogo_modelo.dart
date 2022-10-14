@@ -7,6 +7,7 @@ import 'dart:io';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 ProductoCatalogoModelo productoCatalogoModeloFromJson(String str) =>
     ProductoCatalogoModelo.fromJson(json.decode(str));
@@ -46,18 +47,25 @@ class ProductoCatalogoModelo {
       };
 
   Future<void> guardarProducto() async {
+    //Carga archivos en l storge de firebase
     final storage = FirebaseStorage.instance.ref();
 
     File file = File(img);
     print(file.parent);
     String nameFile = img.replaceAll(file.parent.toString(), '');
     print('************NameFile $nameFile');
-    final rutaRef = storage.child('imagenfoto/');
+      final uid = await const FlutterSecureStorage().read(key: 'uid');
+    final rutaRef = storage.child('miCatalogo/${uid}/${nombre}/imagenfoto/');
 
     try {
       img = await rutaRef.putFile(file).snapshot.ref.getDownloadURL();
     print('********guardarProducto***: ${img}');
-      await database.ref("productos").child(nombre).set(toJson());
+    //fin carga archivos
+
+      //extrae la uid del usuario de la memoria del telefono
+
+
+      await database.ref("miCatalogo").child(uid!).child(nombre).set(toJson());
       print(toString());
     } catch (error) {
       print('********guardarProducto catch***: $error');
