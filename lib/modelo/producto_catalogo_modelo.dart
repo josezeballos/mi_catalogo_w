@@ -48,23 +48,13 @@ class ProductoCatalogoModelo {
 
   Future<void> guardarProducto() async {
     //Carga archivos en l storge de firebase
-    final storage = FirebaseStorage.instance.ref();
-
-    File file = File(img);
-    print(file.parent);
-    String nameFile = img.replaceAll(file.parent.toString(), '');
-    print('************NameFile $nameFile');
-      final uid = await const FlutterSecureStorage().read(key: 'uid');
-    final rutaRef = storage.child('miCatalogo/${uid}/${nombre}/imagenfoto/');
-
     try {
-      img = await rutaRef.putFile(file).snapshot.ref.getDownloadURL();
-    print('********guardarProducto***: ${img}');
-    //fin carga archivos
-
+      print('********guardarProducto imagen url***: ${img}');
+      //fin carga archivos
       //extrae la uid del usuario de la memoria del telefono
+      final uid = await const FlutterSecureStorage().read(key: 'uid');
 
-
+      print('*///////////////////////${toString()}');
       await database.ref("miCatalogo").child(uid!).child(nombre).set(toJson());
       print(toString());
     } catch (error) {

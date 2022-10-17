@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mi_catalogo_w/vistas/widgets/menu_widget.dart';
 
@@ -50,7 +52,7 @@ class _NuevoProductoVistaState extends State<NuevoProductoVista> {
                     image =
                         await _picker.pickImage(source: ImageSource.gallery);
                     setState(() {});
-                    print('${image!.path}');
+                    print(image!.path);
                   },
                   child: Text('Agregar')),
               TextField(
@@ -67,14 +69,30 @@ class _NuevoProductoVistaState extends State<NuevoProductoVista> {
               ),
               ElevatedButton(
                   onPressed: () async{
-                    await ProductoCatalogoModelo(
-                            img: image!.path,
-                            nombre: nombre.text,
-                            precio: double.parse(precio.text),
-                            descripcion: descripcion.text)
-                        .guardarProducto();
-                    if (!mounted) return;
-                    Navigator.pop(context);
+                    try {
+                      print('********************${image!.path}');
+                      final uid = await const FlutterSecureStorage().read(key: 'uid');
+                      final storage = FirebaseStorage.instance.ref();
+                      //esto crea la ruta de referencia  del archivo en firebase storage
+                      final rutaRef = storage.child('miCatalogo/${uid}/${nombre.text}/');
+                      print('*///////////////////////${rutaRef}');
+
+                      //carga el archivo en firebase
+                      await rutaRef.child(image!.name).putFile(File(image!.path));
+                      final img=await rutaRef.getDownloadURL();
+                      print('*////-------///////////////////${img}');
+
+                      await ProductoCatalogoModelo(
+                              img: img,
+                              nombre: nombre.text,
+                              precio: double.parse(precio.text),
+                              descripcion: descripcion.text)
+                          .guardarProducto();
+                      if (!mounted) return;
+                      Navigator.pop(context);
+                    } catch (e, s) {
+                      print(s);
+                    }
                   },
                   child: Text('guardar'))
             ],
