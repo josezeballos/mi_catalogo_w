@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mi_catalogo_w/vistas/home_vista.dart';
 import 'package:mi_catalogo_w/vistas/lista_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/nuevo_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/usuarios/iniciar_con_telefono_vista.dart';
@@ -52,8 +53,19 @@ class MenuWidget extends StatelessWidget {
                 icon: const Icon(Icons.arrow_right),
                 onPressed: () => Navigator.pushReplacementNamed(context,
                     IniciarConTelefonoVista().routName),
+
               ),
-            )
+            ),
+            ListTile(
+              title: const Text('Home'),
+              trailing: IconButton(
+                icon: const Icon(Icons.arrow_right),
+                onPressed: () => Navigator.pushReplacementNamed(context,
+                    HomeVista().routName),
+
+              ),
+            ),
+
           ],
         )),
       ],

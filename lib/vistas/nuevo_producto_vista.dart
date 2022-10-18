@@ -79,7 +79,7 @@ class _NuevoProductoVistaState extends State<NuevoProductoVista> {
 
                       //carga el archivo en firebase
                       await rutaRef.child(image!.name).putFile(File(image!.path));
-                      final img=await rutaRef.getDownloadURL();
+                      final img=await rutaRef.child(image!.name).getDownloadURL();
                       print('*////-------///////////////////${img}');
 
                       await ProductoCatalogoModelo(

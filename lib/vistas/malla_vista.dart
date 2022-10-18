@@ -1,6 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mi_catalogo_w/modelo/producto_catalogo_modelo.dart';
+import 'package:mi_catalogo_w/vistas/detalles_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/widgets/menu_widget.dart';
 
 import 'lista_producto_vista.dart';
@@ -27,11 +29,12 @@ class _MallaVistaState extends State<MallaVista> {
   );
   int _selecteIndex = 0;
 
+
+  listenProduct() async {
+  final uid = await FlutterSecureStorage().read(key: 'uid'); //captura el uid del usuario desde el dispositivo
+
   // final FirebaseDatabase database = FirebaseDatabase.instance;
-
-  DatabaseReference starCountRef = FirebaseDatabase.instance.ref('productos');
-
-  listenProduct() {
+  DatabaseReference starCountRef = FirebaseDatabase.instance.ref('miCatalogo/$uid');
     starCountRef.onValue.listen((DatabaseEvent event) {
       final data = event.snapshot.value as Map;
       producto.clear();
@@ -101,18 +104,25 @@ class _MallaVistaState extends State<MallaVista> {
                   mainAxisSpacing: 10),
               itemCount: producto.length,
               itemBuilder: (context, index) {
-                return Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.black12,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 2, color: Colors.black26)),
-                  child: Column(
-                    children: [
-                      Expanded(child: Image(image: NetworkImage(producto[index].img))),
-                      Text(producto[index].nombre),
-                      Text('${producto[index].precio}'),
-                    ],
+                return GestureDetector( //widget para reconocer gestos de las pantallas
+                  onTap: () {
+
+                    Navigator.pushNamed(context, DetallesProductoVista().routName, arguments: producto[index]);
+
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.black12,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(width: 2, color: Colors.black26)),
+                    child: Column(
+                      children: [
+                        Expanded(child: Image(image: NetworkImage(producto[index].img))),
+                        Text(producto[index].nombre),
+                        Text('${producto[index].precio}'),
+                      ],
+                    ),
                   ),
                 );
               },
