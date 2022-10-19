@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mi_catalogo_w/firebase_options.dart';
+import 'package:mi_catalogo_w/servicios/indexs.dart';
 import 'package:mi_catalogo_w/vistas/detalles_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/home_vista.dart';
 import 'package:mi_catalogo_w/vistas/lista_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/malla_vista.dart';
 import 'package:mi_catalogo_w/vistas/nuevo_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/usuarios/iniciar_con_telefono_vista.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,24 +24,29 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+    return MultiProvider(
+      providers: [
+         ChangeNotifierProvider<Index>(create: (_) => Index()),
+      ],
+      child: MaterialApp( //widget padre de la app
+        title: 'Flutter Demo',
+        theme: ThemeData(
 
-        primarySwatch: Colors.lightBlue,
+          primarySwatch: Colors.lightBlue,
+        ),
+        initialRoute: const  HomeVista().routName,
+        routes: {
+          const HomeVista().routName:(context) => const HomeVista(),
+          const MallaVista().routName:(context) => const MallaVista(),
+          const NuevoProductoVista().routName:(context) => const NuevoProductoVista(),
+          const ListaProductoVista().routName:(context) => const ListaProductoVista(),
+          const DetallesProductoVista().routName:(context) => const DetallesProductoVista(),
+          IniciarConTelefonoVista().routName:(context) => IniciarConTelefonoVista(),
+
+
+
+        }
       ),
-      initialRoute: const  HomeVista().routName,
-      routes: {
-        const HomeVista().routName:(context) => const HomeVista(),
-        const MallaVista().routName:(context) => const MallaVista(),
-        const NuevoProductoVista().routName:(context) => const NuevoProductoVista(),
-        const ListaProductoVista().routName:(context) => const ListaProductoVista(),
-        const DetallesProductoVista().routName:(context) => const DetallesProductoVista(),
-        IniciarConTelefonoVista().routName:(context) => IniciarConTelefonoVista(),
-
-
-
-      }
     );
   }
 }

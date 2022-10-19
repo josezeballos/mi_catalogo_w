@@ -1,17 +1,36 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:mi_catalogo_w/herramientas/generador_de_codigo.dart';
 import 'package:mi_catalogo_w/modelo/producto_catalogo_modelo.dart';
 
 class DetallesProductoVista extends StatelessWidget {
   const DetallesProductoVista({Key? key}) : super(key: key);
-final String routName='DetallesProductoVista';
-
+  final String routName = 'DetallesProductoVista';
 
   @override
   Widget build(BuildContext context) {
-    final producto = ModalRoute.of(context)!.settings.arguments as ProductoCatalogoModelo;
+    final producto =
+        ModalRoute.of(context)!.settings.arguments as ProductoCatalogoModelo;
     return Scaffold(
-      appBar: AppBar(title: Text(producto.nombre),),
-
-    );
+        appBar: AppBar(
+          title: Text(producto.nombre),
+        ),
+        body: ListView(
+          children: [
+            SizedBox(
+                height: 300,
+                child:
+                    Image(image: NetworkImage(producto.img))),
+            Text(producto.nombre),
+            Text('${producto.precio}'),
+            Text(producto.descripcion!),
+            ElevatedButton(
+                onPressed: () async {
+                  final database = FirebaseDatabase.instance;
+                  await database.ref("productosEnRevision").child(generadorDeCodigo()).set(producto.toJson());
+                },
+                child: Text('Publicar'))
+          ],
+        ));
   }
 }

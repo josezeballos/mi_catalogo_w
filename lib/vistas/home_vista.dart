@@ -33,12 +33,14 @@ class _HomeVistaState extends State<HomeVista> {
                 }, icon: Icon(Icons.person)),
 
             ],
-            bottom: const TabBar(
+            bottom: TabBar(
+              onTap: (value)=>print(value),
+
               tabs: [
-                const Tab(icon: const Icon(Icons.qr_code), text: 'Catalogo'),
+                const Tab(icon: const Icon(Icons.add_business), text: 'Catalogo'),
                 Tab(
-                  icon: const Icon(Icons.perm_identity),
-                  text: 'Mi cuenta',
+                  icon: const Icon(Icons.edit),
+                  text: 'Vender',
                 ),
               ],
             ),
