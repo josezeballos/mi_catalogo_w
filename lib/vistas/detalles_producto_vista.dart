@@ -27,7 +27,9 @@ class DetallesProductoVista extends StatelessWidget {
             ElevatedButton(
                 onPressed: () async {
                   final database = FirebaseDatabase.instance;
-                  await database.ref("productosEnRevision").child(generadorDeCodigo()).set(producto.toJson());
+                  producto.codigoKey = generadorDeCodigo();
+                  await database.ref("productosEnRevision").child(producto.codigoKey!).set(producto.toJson());
+
                 },
                 child: Text('Publicar'))
           ],

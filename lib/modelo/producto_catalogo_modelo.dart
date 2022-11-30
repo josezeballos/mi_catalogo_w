@@ -22,12 +22,14 @@ class ProductoCatalogoModelo {
     required this.nombre,
     required this.precio,
     this.descripcion,
+    this.codigoKey
   });
 
   String img;
   String nombre;
   double precio;
   String? descripcion;
+  String? codigoKey;
 
   final database = FirebaseDatabase.instance;
 
@@ -37,6 +39,7 @@ class ProductoCatalogoModelo {
         nombre: json["nombre"],
         precio: json["precio"].toDouble(),
         descripcion: json["descripcion"],
+        codigoKey: json["codigoKey"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,6 +47,7 @@ class ProductoCatalogoModelo {
         "nombre": nombre,
         "precio": precio,
         "descripcion": descripcion,
+        "codigoKey": codigoKey,
       };
 
   Future<void> guardarProducto() async {
@@ -64,6 +68,6 @@ class ProductoCatalogoModelo {
 
   @override
   String toString() {
-    return 'ProductoCatalogoModelo{img: $img ,\n nombre: $nombre,\n precio: $precio,\n descripcion: $descripcion}';
+    return 'ProductoCatalogoModelo{img: $img ,\n nombre: $nombre,\n precio: $precio,\n descripcion: $descripcion, \n codigoKey: $codigoKey}';
   }
 }
