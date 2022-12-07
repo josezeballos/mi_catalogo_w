@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mi_catalogo_w/modelo/producto_catalogo_modelo.dart';
+import 'package:mi_catalogo_w/vistas/catalogo_general/informacion_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/detalles_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/widgets/menu_widget.dart';
 
@@ -34,7 +35,7 @@ class _MallaVistaState extends State<MallaVista> {
   final uid = await FlutterSecureStorage().read(key: 'uid'); //captura el uid del usuario desde el dispositivo
 
   // final FirebaseDatabase database = FirebaseDatabase.instance;
-  DatabaseReference starCountRef = FirebaseDatabase.instance.ref('miCatalogo/$uid');
+  DatabaseReference starCountRef = FirebaseDatabase.instance.ref('catalogoGeneral');
     starCountRef.onValue.listen((DatabaseEvent event) {
       final data = event.snapshot.value as Map;
       producto.clear();
@@ -43,7 +44,10 @@ class _MallaVistaState extends State<MallaVista> {
             img: value['img'],
             nombre: value['nombre'],
             precio: double.parse(value['precio'].toString()),
-            descripcion: value['descripcion']));
+            descripcion: value['descripcion'],
+          codigoKey: value['codigoKey'],
+        ));
+
         print(producto);
         setState(() {});
       });
@@ -107,7 +111,7 @@ class _MallaVistaState extends State<MallaVista> {
                 return GestureDetector( //widget para reconocer gestos de las pantallas
                   onTap: () {
 
-                    Navigator.pushNamed(context, DetallesProductoVista().routName, arguments: producto[index]);
+                    Navigator.pushNamed(context, InformacionProductoVista().routName, arguments: producto[index]);
 
                   },
                   child: Container(

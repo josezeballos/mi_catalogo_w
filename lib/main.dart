@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mi_catalogo_w/firebase_options.dart';
 import 'package:mi_catalogo_w/servicios/indexs.dart';
+import 'package:mi_catalogo_w/vistas/catalogo_general/informacion_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/detalles_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/home_vista.dart';
 import 'package:mi_catalogo_w/vistas/lista_producto_vista.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
           const ListaProductoVista().routName:(context) => const ListaProductoVista(),
           const DetallesProductoVista().routName:(context) => const DetallesProductoVista(),
           IniciarConTelefonoVista().routName:(context) => IniciarConTelefonoVista(),
+          InformacionProductoVista().routName:(context) => InformacionProductoVista(),
 
 
 
