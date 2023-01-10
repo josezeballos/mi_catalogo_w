@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mi_catalogo_w/modelo/producto_catalogo_modelo.dart';
 import 'package:mi_catalogo_w/vistas/detalles_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/widgets/menu_widget.dart';
@@ -14,10 +15,11 @@ class ListaProductoVista extends StatefulWidget {
 }
 
 class _ListaProductoVistaState extends State<ListaProductoVista> {
-  DatabaseReference starCountRef = FirebaseDatabase.instance.ref('productos');
+  DatabaseReference starCountRef = FirebaseDatabase.instance.ref('miCatalogo');
   List<ProductoCatalogoModelo> producto = [];
-  listenProduct() {
-    starCountRef.onValue.listen((DatabaseEvent event) {
+  listenProduct() async {
+    final uid = await FlutterSecureStorage().read(key: 'uid');
+    starCountRef.child(uid!).onValue.listen((DatabaseEvent event) {
       final data = event.snapshot.value as Map;
       producto.clear();
       data.forEach((key, value) {
@@ -55,7 +57,7 @@ class _ListaProductoVistaState extends State<ListaProductoVista> {
             nombre: item.nombre,
             precio: item.precio.toString(),
             onPressed: () =>
-                Navigator.pushNamed(context, DetallesProductoVista().routName),
+                Navigator.pushNamed(context, DetallesProductoVista().routName, arguments: item),
           );
         },
         itemCount: producto.length,

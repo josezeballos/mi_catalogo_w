@@ -99,7 +99,7 @@ class _MallaVistaState extends State<MallaVista> {
             },
           ),
           Flexible(
-            child: GridView.builder(
+            child: GridView.builder(reverse: true,
               controller: ScrollController(),
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,

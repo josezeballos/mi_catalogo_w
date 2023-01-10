@@ -90,8 +90,8 @@ class _NuevoProductoVistaState extends State<NuevoProductoVista> {
                           .guardarProducto();
                       if (!mounted) return;
                       Navigator.pop(context);
-                    } catch (e, s) {
-                      print(s);
+                    } catch (e) {
+                      print(e);
                     }
                   },
                   child: Text('guardar'))
