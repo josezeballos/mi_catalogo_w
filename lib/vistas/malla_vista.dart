@@ -65,16 +65,8 @@ class _MallaVistaState extends State<MallaVista> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add_business),
-        onPressed: () async {
 
-        },
-      ),
-      appBar: AppBar(
-        title: const Text('MallaVista'),
-      ),
-      drawer: const MenuWidget(),
+
       body: Row(
         children: [
           LayoutBuilder(

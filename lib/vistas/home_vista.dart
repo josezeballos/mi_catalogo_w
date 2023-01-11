@@ -19,32 +19,32 @@ class HomeVista extends StatefulWidget {
 
 class _HomeVistaState extends State<HomeVista> {
   final user = const FlutterSecureStorage();
+
   @override
   Widget build(BuildContext context) {
     final index = Provider.of<Index>(context);
     return DefaultTabController(
       initialIndex: index.indexTabBar,
-
       length: 2,
       child: Scaffold(
           appBar: AppBar(
             leading: Image.asset('asset/logo.png', height: 300),
             actions: [
-              BuscadorWidget(),
+              const BuscadorWidget(),
               // IconButton(onPressed: (){}, icon: Icon(Icons.search)),
-              IconButton(onPressed: (){
-
-                Navigator.pushNamed(context, IniciarConTelefonoVista().routName);
-                }, icon: Icon(Icons.person)),
-
+              IconButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                        context, const UsuarioVista().routName);
+                  },
+                  icon: const Icon(Icons.person)),
             ],
             bottom: TabBar(
-              onTap: (value)=>index.indexTabBar=value,
-
-              tabs: [
-                const Tab(icon: const Icon(Icons.add_business), text: 'Catalogo'),
+              onTap: (value) => index.indexTabBar = value,
+              tabs: const [
+                Tab(icon: Icon(Icons.add_business), text: 'Catalogo'),
                 Tab(
-                  icon: const Icon(Icons.edit),
+                  icon: Icon(Icons.edit),
                   text: 'Vender',
                 ),
               ],
@@ -55,24 +55,23 @@ class _HomeVistaState extends State<HomeVista> {
             //physics: const NeverScrollableScrollPhysics(),
             controller: index.pageController,
             children: [
-              MallaVista(),
-              Scaffold(
+              const MallaVista(),
+              const Scaffold(
                   body: Center(
                 child: Text('Catalogo'),
               )),
               FutureBuilder(
-                  future: user.readAll(), builder: (context, snapshot) {
-                      print(snapshot.hasData);
-                    if(
-                    snapshot.hasData
-                    ){
+                  future: user.readAll(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
                       final data = snapshot.data as Map;
-                      if(data.isNotEmpty)
-                      return UsuarioVista();
+                      if (data.isNotEmpty) {
+                        return const UsuarioVista();
+                      }
                     }
 
                     return IniciarConTelefonoVista();
-              }),
+                  }),
             ],
           )),
     );

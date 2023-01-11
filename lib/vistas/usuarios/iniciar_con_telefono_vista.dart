@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mi_catalogo_w/modelo/usuario_modelo.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mi_catalogo_w/vistas/widgets/menu_widget.dart';
 
 import '../home_vista.dart';
 
@@ -25,12 +26,16 @@ class _IniciarConTelefonoVistaState extends State<IniciarConTelefonoVista> {
     final telefono = TextEditingController();
     return Scaffold(
         appBar: AppBar(
-          title: Text('iniciar sesion'),
+          title: const Text('iniciar sesion'),
+          leading: IconButton(
+              onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                  context, const HomeVista().routName, (route) => false),
+              icon: const Icon(Icons.home)),
         ),
         body: Center(
           child: Column(
             children: [
-              Text('Intégrate a Contizar Ya, con un numero de telefono'),
+              const Text('Intégrate a Contizar Ya, con un numero de telefono'),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
@@ -54,7 +59,7 @@ class _IniciarConTelefonoVistaState extends State<IniciarConTelefonoVista> {
                           await _dialogBuilder(context);
                           print('******************************$smsCode');
                           try {
-                            final storage = FlutterSecureStorage();
+                            final storage = const FlutterSecureStorage();
 
                             if (smsCode.isNotEmpty) {
                               PhoneAuthCredential credential =
@@ -64,15 +69,14 @@ class _IniciarConTelefonoVistaState extends State<IniciarConTelefonoVista> {
 
                               final userRespuesta =
                                   await auth.signInWithCredential(credential);
-                              final userModel = usuarioModeloFromJson(jsonEncode({
+                              final userModel =
+                                  usuarioModeloFromJson(jsonEncode({
                                 "uid": userRespuesta.user!.uid,
                                 "nombreCompleto": "Usuario Anonimo",
                                 "numeroTelefono":
-                                userRespuesta.user!.phoneNumber
+                                    userRespuesta.user!.phoneNumber
                               }));
                               await userModel.guardarUsuario();
-
-
 
                               storage.write(
                                   key: 'uid', value: userRespuesta.user!.uid);
@@ -92,7 +96,7 @@ class _IniciarConTelefonoVistaState extends State<IniciarConTelefonoVista> {
                       );
                     }
                   },
-                  child: Text('entrar')),
+                  child: const Text('entrar')),
             ],
           ),
         ));

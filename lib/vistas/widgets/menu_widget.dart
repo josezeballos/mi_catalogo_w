@@ -30,14 +30,7 @@ class MenuWidget extends StatelessWidget {
                     context, const NuevoProductoVista().routName),
               ),
             ),
-            ListTile(
-              title: const Text('malla'),
-              trailing: IconButton(
-                icon: const Icon(Icons.arrow_right),
-                onPressed: () => Navigator.pushReplacementNamed(
-                    context, const MallaVista().routName),
-              ),
-            ),
+
             ListTile(
               title: const Text('lista'),
               trailing: IconButton(
@@ -47,15 +40,7 @@ class MenuWidget extends StatelessWidget {
 
               ),
             ),
-            ListTile(
-              title: const Text('Iniciar sesion'),
-              trailing: IconButton(
-                icon: const Icon(Icons.arrow_right),
-                onPressed: () => Navigator.pushReplacementNamed(context,
-                    IniciarConTelefonoVista().routName),
 
-              ),
-            ),
             ListTile(
               title: const Text('Home'),
               trailing: IconButton(

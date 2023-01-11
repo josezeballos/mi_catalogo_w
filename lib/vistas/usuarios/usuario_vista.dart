@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mi_catalogo_w/vistas/usuarios/iniciar_con_telefono_vista.dart';
+import 'package:mi_catalogo_w/vistas/usuarios/perfil_usuario_vista.dart';
 
 import '../home_vista.dart';
 
 class UsuarioVista extends StatefulWidget {
+  final String routName = 'UsuarioVista';
   const UsuarioVista({Key? key}) : super(key: key);
 
   @override
@@ -21,29 +24,9 @@ class _UsuarioVistaState extends State<UsuarioVista> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final uid = snapshot.data as Map;
-          print('++++++++++++++++++$uid');
-          return Scaffold(
-            body: Column(children: [
-              Center(child: Text('Nombre: ${uid['uid']}')),
-              Center(child: Text('Telefono${uid['numeroTelefono']}'),),
-              Center(child: Text('Codigo${uid['numeroTelefono']}'),),
-              ElevatedButton(onPressed: () async {
-                FirebaseAuth auth = FirebaseAuth.instance;
-                try{
-                await user.deleteAll();
-
-                await auth.signOut();
-                setState(() {
-
-                });
-                if(!mounted)return;
-                Navigator.pushReplacementNamed(context, const HomeVista().routName);
-
-                }catch (error){
-                  print(error);
-                }
-              }, child: Text('cerrar sesion'))
-            ],));
+          if(uid.isEmpty){return IniciarConTelefonoVista();}
+          print('+++++++++++++++gfd+++++++++++++${uid}');
+          return  PerfilUsuarioVista(uid: uid);
 
         }
         return const Center(child: CircularProgressIndicator());

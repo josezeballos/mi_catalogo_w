@@ -9,6 +9,8 @@ import 'package:mi_catalogo_w/vistas/lista_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/malla_vista.dart';
 import 'package:mi_catalogo_w/vistas/nuevo_producto_vista.dart';
 import 'package:mi_catalogo_w/vistas/usuarios/iniciar_con_telefono_vista.dart';
+import 'package:mi_catalogo_w/vistas/usuarios/perfil_usuario_vista.dart';
+import 'package:mi_catalogo_w/vistas/usuarios/usuario_vista.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -44,6 +46,8 @@ class MyApp extends StatelessWidget {
           const DetallesProductoVista().routName:(context) => const DetallesProductoVista(),
           IniciarConTelefonoVista().routName:(context) => IniciarConTelefonoVista(),
           InformacionProductoVista().routName:(context) => InformacionProductoVista(),
+          UsuarioVista().routName:(context) => UsuarioVista(),
+          PerfilUsuarioVista(uid: {},).routName:(context) => PerfilUsuarioVista(uid: {}),
 
 
 
